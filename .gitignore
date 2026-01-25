@@ -1,3 +1,12 @@
+# project specific .gitignore
+
+# README related
+README.html
+README_files/
+
+
+# General Python .gitignore
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

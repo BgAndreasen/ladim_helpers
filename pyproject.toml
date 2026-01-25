@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ladim_helpers"
+version = "0.1.0"
+description = "Helper functions for running LADiM and postprocessing LADiM output"
+readme = "README.md"
+authors = [{ name = "Birgitta Andreasen", email = "birgitta@firum.fo" }]
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "pyyaml",
+    "xarray",
+    "netCDF4",
+]
+
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "ruff>=0.6.0",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
