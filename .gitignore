@@ -4,6 +4,8 @@
 README.html
 README_files/
 
+# user specifics
+.vscode/
 
 # General Python .gitignore
 
