@@ -27,7 +27,10 @@ def capture_root_to(handler: logging.Handler, level: int):
         root.removeHandler(handler)
         root.setLevel(old_level)
 
-def _configure_seed_logger(log_path: Path, name: str, level: int = logging.INFO) -> logging.Logger:
+def _configure_seed_logger(
+    log_path: Path, 
+    name: str, 
+    level: int = logging.INFO) -> logging.Logger:
     """
     Create a per-seed logger that logs to `log_path` without clobbering global/root logging.
     """
@@ -53,6 +56,7 @@ def _status(msg: str, verbose: bool) -> None:
 def run_ladim_seeds(
     seeds: Iterable[int],
     ladim_yaml_path: Path,
+    particle_release_file: Path | None = None,
     crecon_yaml_path: Optional[Path] = None,
     output_dir: Path = Path("."),
     publish_dir: Optional[Path] = None,
@@ -89,6 +93,11 @@ def run_ladim_seeds(
     publish_dir.mkdir(parents=True, exist_ok=True)
 
     base_cfg = yaml.safe_load(Path(ladim_yaml_path).read_text(encoding="utf-8"))
+
+    if particle_release_file is not None:
+        base_cfg["files"]["particle_release_file"] = str(
+            Path(particle_release_file).resolve()
+        )
 
     out_template = Path(base_cfg["files"]["output_file"]).name
     out_stem = Path(out_template).stem
